@@ -22,4 +22,4 @@ Contributions are welcome! 🚀
 5. Open a Pull Request.
 
 ## License
-MIT License © 2025 Zahin A. Adib
+MIT License © 2026 TofuGG
