@@ -149,7 +149,8 @@
   }
   .error-msg::before { content: '⚠ '; }
 
-  #schedule-container { margin-top: 8px; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 0 0 1px rgba(37,99,235,0.15), 0 0 24px rgba(37,99,235,0.08); }
+  #schedule-container { margin-top: 8px; overflow-x: auto; border-radius: 4px; }
+  #schedule-container.has-data { border: 1px solid var(--border); box-shadow: 0 0 0 1px rgba(37,99,235,0.15), 0 0 24px rgba(37,99,235,0.08); }
   #schedule-container::-webkit-scrollbar { height: 4px; }
   #schedule-container::-webkit-scrollbar-track { background: var(--bg-base); }
   #schedule-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -352,6 +353,7 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
   document.getElementById('file-name-display').textContent = file.name;
   document.getElementById('error-msg').style.display = 'none';
   document.getElementById('schedule-container').innerHTML = '';
+  document.getElementById('schedule-container').classList.remove('has-data');
   document.getElementById('save-buttons').style.display = 'none';
 
   const reader = new FileReader();
@@ -455,6 +457,7 @@ function renderSchedule(entries) {
 
   html += '</tbody></table>';
   document.getElementById('schedule-container').innerHTML = html;
+  document.getElementById('schedule-container').classList.add('has-data');
   document.getElementById('save-buttons').style.display = 'flex';
 }
 
@@ -483,11 +486,11 @@ async function captureFullTable() {
   const table     = container.querySelector('.schedule-table');
   if (!table) return null;
 
-  // Temporarily remove scroll constraints so html2canvas sees the whole table
+  // Temporarily expand container so html2canvas sees the full table width
   const prevOverflow = container.style.overflow;
   const prevWidth    = container.style.width;
   container.style.overflow = 'visible';
-  container.style.width    = table.scrollWidth + 'px';
+  container.style.width    = (table.scrollWidth + 2) + 'px'; // +2 for borders
   document.body.style.overflow = 'hidden';
 
   const canvas = await html2canvas(container, {
@@ -496,10 +499,10 @@ async function captureFullTable() {
     useCORS: true,
     scrollX: 0,
     scrollY: 0,
-    width:        table.scrollWidth,
-    height:       container.scrollHeight,
-    windowWidth:  table.scrollWidth + 64,
-    windowHeight: container.scrollHeight + 64,
+    width:        table.scrollWidth + 2,
+    height:       container.scrollHeight + 2,
+    windowWidth:  table.scrollWidth + 100,
+    windowHeight: container.scrollHeight + 100,
   });
 
   // Restore
