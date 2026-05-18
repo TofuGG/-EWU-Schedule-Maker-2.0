@@ -372,9 +372,7 @@
 </div>
 
 <footer>
-  Created by <a href="https://adib23704.com" target="_blank" rel="noopener noreferrer">Zahin A. Adib</a></br>
-  Improved by <a href="https://tofuii.me" target="_blank" rel="noopener noreferrer">Tofu</a>
-
+  Created by <a href="https://adib23704.com" target="_blank" rel="noopener noreferrer">Zahin A. Adib</a>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -529,10 +527,43 @@ function toMin(t) {
   return document.querySelector('#schedule-container');
 }
 
+async function captureFullTable() {
+  const container = document.querySelector('#schedule-container');
+  const table = container.querySelector('.schedule-table');
+  if (!table) return null;
+
+  // Temporarily remove overflow/scroll constraints so html2canvas sees the full table
+  const prevContainerOverflow = container.style.overflow;
+  const prevContainerWidth    = container.style.width;
+  const prevBodyOverflow      = document.body.style.overflow;
+
+  container.style.overflow = 'visible';
+  container.style.width    = table.scrollWidth + 'px';
+  document.body.style.overflow = 'hidden';
+
+  const canvas = await html2canvas(container, {
+    scale: 2,
+    backgroundColor: '#111827',
+    useCORS: true,
+    scrollX: 0,
+    scrollY: 0,
+    width:  table.scrollWidth,
+    height: container.scrollHeight,
+    windowWidth:  table.scrollWidth + 64,
+    windowHeight: container.scrollHeight + 64,
+  });
+
+  // Restore styles
+  container.style.overflow = prevContainerOverflow;
+  container.style.width    = prevContainerWidth;
+  document.body.style.overflow = prevBodyOverflow;
+
+  return canvas;
+}
+
 async function saveAsImage() {
-  const el = getTableElement();
-  if (!el) return;
-  const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff', useCORS: true });
+  const canvas = await captureFullTable();
+  if (!canvas) return;
   const link = document.createElement('a');
   link.download = 'ewu-schedule.png';
   link.href = canvas.toDataURL('image/png');
@@ -540,13 +571,17 @@ async function saveAsImage() {
 }
 
 async function saveAsPDF() {
-  const el = getTableElement();
-  if (!el) return;
-  const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff', useCORS: true });
+  const canvas = await captureFullTable();
+  if (!canvas) return;
   const imgData = canvas.toDataURL('image/png');
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
-  pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
+  // Size the PDF page exactly to the image (in pts at 96dpi)
+  const pxToMm = px => px * 0.264583;
+  const w = pxToMm(canvas.width  / 2);
+  const h = pxToMm(canvas.height / 2);
+  const orientation = w > h ? 'landscape' : 'portrait';
+  const pdf = new jsPDF({ orientation, unit: 'mm', format: [w, h] });
+  pdf.addImage(imgData, 'PNG', 0, 0, w, h);
   pdf.save('ewu-schedule.pdf');
 }
 </script>
