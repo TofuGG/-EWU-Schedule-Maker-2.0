@@ -7,17 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-deep:    #070b14;
-    --bg-base:    #0d1320;
-    --bg-card:    #111827;
-    --bg-surface: #162032;
-    --bg-row-alt: #0f1a2a;
-    --border:     #1e3a5f;
-    --border-glow:#2563eb44;
-    --cyan:       #38bdf8;
-    --blue:       #3b82f6;
-    --blue-bright:#60a5fa;
-    --indigo:     #6366f1;
+    --bg-deep:      #070b14;
+    --bg-base:      #0d1320;
+    --bg-card:      #111827;
+    --bg-row-alt:   #0f1a2a;
+    --border:       #1e3a5f;
+    --cyan:         #38bdf8;
+    --blue:         #3b82f6;
+    --blue-bright:  #60a5fa;
+    --indigo:       #6366f1;
     --text-primary: #e2e8f0;
     --text-muted:   #64748b;
     --text-dim:     #334155;
@@ -39,7 +37,6 @@
     overflow-x: hidden;
   }
 
-  /* Animated grid background */
   body::before {
     content: '';
     position: fixed;
@@ -52,7 +49,6 @@
     z-index: 0;
   }
 
-  /* Radial glow in center */
   body::after {
     content: '';
     position: fixed;
@@ -66,38 +62,6 @@
     z-index: 0;
   }
 
-  /* Header branding */
-  .site-header {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    margin-bottom: 28px;
-  }
-  .site-header h1 {
-    font-family: 'Orbitron', monospace;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--blue-bright);
-    text-shadow: 0 0 24px rgba(96,165,250,0.5), 0 0 48px rgba(59,130,246,0.2);
-    text-transform: uppercase;
-  }
-  .site-header .sub {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 4px;
-    margin-top: 6px;
-    text-transform: uppercase;
-  }
-  .header-line {
-    width: 200px;
-    height: 1px;
-    margin: 12px auto 0;
-    background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  }
-
-  /* Main card */
   .card {
     position: relative;
     z-index: 1;
@@ -113,7 +77,6 @@
       inset 0 1px 0 rgba(96,165,250,0.06);
   }
 
-  /* Corner accents */
   .card::before, .card::after {
     content: '';
     position: absolute;
@@ -125,7 +88,6 @@
   .card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
   .card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-  /* Upload section */
   .upload-section { padding: 8px 0 24px; }
   .upload-inner {
     display: flex;
@@ -136,12 +98,17 @@
   .upload-label-text {
     font-family: 'Share Tech Mono', monospace;
     font-size: 13px;
-    font-weight: 400;
     color: var(--cyan);
     letter-spacing: 2px;
     text-transform: uppercase;
   }
-  .upload-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .upload-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   #fileInput { display: none; }
 
   .choose-btn {
@@ -159,7 +126,6 @@
     display: inline-block;
     transition: all 0.2s;
     box-shadow: 0 0 16px rgba(59,130,246,0.4);
-    position: relative;
   }
   .choose-btn:hover {
     box-shadow: 0 0 28px rgba(59,130,246,0.7);
@@ -170,7 +136,6 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 12px;
     color: var(--text-muted);
-    letter-spacing: 0.5px;
   }
 
   .error-msg {
@@ -184,15 +149,7 @@
   }
   .error-msg::before { content: '⚠ '; }
 
-  /* Divider before table */
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 4px 0 0;
-  }
-
-  /* Schedule table */
-  #schedule-container { margin-top: 0; overflow-x: auto; }
+  #schedule-container { margin-top: 8px; overflow-x: auto; }
   #schedule-container::-webkit-scrollbar { height: 4px; }
   #schedule-container::-webkit-scrollbar-track { background: var(--bg-base); }
   #schedule-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -245,7 +202,6 @@
     border-right: 1px solid rgba(30,58,95,0.25);
   }
   .schedule-table tbody td:last-child { border-right: none; }
-
   .schedule-table tbody td:first-child {
     text-align: left;
     font-family: 'Orbitron', monospace;
@@ -263,7 +219,6 @@
   .cell-course {
     font-family: 'Share Tech Mono', monospace;
     color: var(--blue-bright);
-    font-weight: 400;
     font-size: 12px;
     display: block;
     letter-spacing: 0.5px;
@@ -277,12 +232,12 @@
     letter-spacing: 0.5px;
   }
 
-  /* Save buttons */
   #save-buttons {
     display: none;
     justify-content: center;
     gap: 14px;
     margin-top: 28px;
+    flex-wrap: wrap;
   }
   .save-btn {
     font-family: 'Orbitron', monospace;
@@ -324,7 +279,6 @@
     transform: translateY(-1px);
   }
 
-  /* Footer */
   footer {
     position: relative;
     z-index: 1;
@@ -335,12 +289,9 @@
     letter-spacing: 2px;
     text-align: center;
     text-transform: uppercase;
+    line-height: 2;
   }
-  footer a {
-    color: var(--blue-bright);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  footer a { color: var(--blue-bright); text-decoration: none; transition: color 0.2s; }
   footer a:hover { color: var(--cyan); text-shadow: 0 0 8px rgba(56,189,248,0.5); }
 </style>
 </head>
@@ -358,7 +309,9 @@
       <p class="error-msg" id="error-msg">Could not parse the file. Please upload a valid EWU advising slip.</p>
     </div>
   </div>
+
   <div id="schedule-container"></div>
+
   <div id="save-buttons">
     <button class="save-btn btn-image" onclick="saveAsImage()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -372,38 +325,41 @@
 </div>
 
 <footer>
-  Created by <a href="https://adib23704.com" target="_blank" rel="noopener noreferrer">Zahin A. Adib</a>
+  Created by <a href="https://adib23704.com" target="_blank" rel="noopener noreferrer">Zahin A. Adib</a><br>
+  Improved by <a href="https://tofuii.me" target="_blank" rel="noopener noreferrer">Tofu</a>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// EWU day-code mapping
-// S=Sunday, M=Monday, T=Tuesday, W=Wednesday, R=Thursday
-const DAY_MAP = { S:'Sunday', M:'Monday', T:'Tuesday', W:'Wednesday', R:'Thursday' };
+// ── Constants ────────────────────────────────────────────────────────────────
+// S=Sunday M=Monday T=Tuesday W=Wednesday R=Thursday
+const DAY_MAP   = { S:'Sunday', M:'Monday', T:'Tuesday', W:'Wednesday', R:'Thursday' };
 const DAY_ORDER = ['Sunday','Monday','Tuesday','Wednesday','Thursday'];
 
-// Fixed column indices (0-based)
-// C=2, Q=16, BA=52, BM=64
+// Fixed 0-based column indices in the EWU advising slip:
+// C=2  Q=16  BA=52  BM=64
 const COL_COURSE = 2;
 const COL_SEC    = 16;
 const COL_TIME   = 52;
 const COL_ROOM   = 64;
 
+// ── File input ────────────────────────────────────────────────────────────────
 document.getElementById('fileInput').addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (!file) return;
   document.getElementById('file-name-display').textContent = file.name;
   document.getElementById('error-msg').style.display = 'none';
   document.getElementById('schedule-container').innerHTML = '';
+  document.getElementById('save-buttons').style.display = 'none';
 
   const reader = new FileReader();
   reader.onload = function(evt) {
     try {
       const data = new Uint8Array(evt.target.result);
-      const wb = XLSX.read(data, { type: 'array', raw: false });
-      const ws = wb.Sheets[wb.SheetNames[0]];
+      const wb   = XLSX.read(data, { type: 'array', raw: false });
+      const ws   = wb.Sheets[wb.SheetNames[0]];
       const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null, raw: false });
       const entries = parseEntries(rows);
       if (entries.length === 0) throw new Error('no entries');
@@ -415,10 +371,11 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
   reader.readAsArrayBuffer(file);
 });
 
+// ── Parser ────────────────────────────────────────────────────────────────────
 function parseEntries(rows) {
   const entries = [];
 
-  // Find the header row where col C = "Course(s)"
+  // Find header row: col C = "Course(s)"
   let dataStart = -1;
   for (let i = 0; i < rows.length; i++) {
     const c = rows[i][COL_COURSE];
@@ -426,45 +383,39 @@ function parseEntries(rows) {
   }
   if (dataStart === -1) return entries;
 
-  // Track the last seen course label — continuation rows have blank C but filled BA/BM
-  let lastLabel = '';
-  // Track how many consecutive blank-C rows we've seen (stop after too many)
-  let blankCStreak = 0;
+  let lastLabel   = '';
+  let blankStreak = 0;
 
   for (let i = dataStart; i < rows.length; i++) {
-    const row = rows[i];
+    const row       = rows[i];
     const courseRaw = row[COL_COURSE] ? String(row[COL_COURSE]).trim() : '';
     const timeRaw   = row[COL_TIME]   ? String(row[COL_TIME]).trim()   : '';
     const roomRaw   = row[COL_ROOM]   ? String(row[COL_ROOM]).trim()   : '';
     const secRaw    = row[COL_SEC]    ? String(row[COL_SEC]).trim()    : '';
 
-    // If course column has a value, check if it's a fee/stop row
     if (courseRaw) {
-      blankCStreak = 0;
+      blankStreak = 0;
       const lower = courseRaw.toLowerCase();
+      // Stop at fee/summary rows
       if (lower.includes('tuition fee') || lower.includes('grand total') || lower.includes('laboratory fee')) break;
-
-      // New course — build label and remember it
+      // New course row — update label
       lastLabel = secRaw ? `${courseRaw} (${secRaw})` : courseRaw;
     } else {
-      // Blank course column — continuation row (same course, different day/time)
-      blankCStreak++;
-      // If too many blank rows in a row with no time data, stop
-      if (blankCStreak > 6 && !timeRaw) break;
-      if (!timeRaw) continue; // blank row with no time — skip but keep going
+      // Continuation row — same course, possibly different day/time slot
+      blankStreak++;
+      if (blankStreak > 6 && !timeRaw) break;
+      if (!timeRaw) continue;
     }
 
-    // Skip if no time data
     if (!timeRaw || !lastLabel) continue;
 
-    // Parse time-weekday: "MW 11:50AM-1:20PM" or "R 4:50PM-6:20PM"
+    // Format: "MW 11:50AM-1:20PM"  or  "R 4:50PM-6:20PM"
     const match = timeRaw.match(/^([A-Z]+)\s+(.+)$/);
     if (!match) continue;
 
     const dayCodes = match[1];
     const timeRange = match[2].replace(/\s+/g, '');
-    // Strip parenthetical room description: "460 (Physics Lab)" -> "460"
-    const room = roomRaw.replace(/\s*\(.*?\)\s*$/, '').trim();
+    const room      = roomRaw.replace(/\s*\(.*?\)\s*$/, '').trim();
 
     for (const ch of dayCodes) {
       const day = DAY_MAP[ch];
@@ -474,9 +425,10 @@ function parseEntries(rows) {
   return entries;
 }
 
+// ── Renderer ──────────────────────────────────────────────────────────────────
 function renderSchedule(entries) {
   const timeSet = new Set(entries.map(e => e.time));
-  const times = sortTimes([...timeSet]);
+  const times   = sortTimes([...timeSet]);
 
   const lookup = {};
   DAY_ORDER.forEach(d => { lookup[d] = {}; times.forEach(t => { lookup[d][t] = []; }); });
@@ -506,13 +458,13 @@ function renderSchedule(entries) {
   document.getElementById('save-buttons').style.display = 'flex';
 }
 
+// ── Sorting ───────────────────────────────────────────────────────────────────
 function sortTimes(times) {
   return times.sort((a, b) => {
     const [aStart, aEnd] = a.split('-');
     const [bStart, bEnd] = b.split('-');
-    const startDiff = toMin(aStart) - toMin(bStart);
-    if (startDiff !== 0) return startDiff;
-    return toMin(aEnd) - toMin(bEnd);
+    const diff = toMin(aStart) - toMin(bStart);
+    return diff !== 0 ? diff : toMin(aEnd) - toMin(bEnd);
   });
 }
 
@@ -523,20 +475,17 @@ function toMin(t) {
   if (m[3].toUpperCase() === 'PM' && h !== 12) h += 12;
   if (m[3].toUpperCase() === 'AM' && h === 12) h = 0;
   return h * 60 + min;
-}function getTableElement() {
-  return document.querySelector('#schedule-container');
 }
 
+// ── Save helpers ──────────────────────────────────────────────────────────────
 async function captureFullTable() {
-  const container = document.querySelector('#schedule-container');
-  const table = container.querySelector('.schedule-table');
+  const container = document.getElementById('schedule-container');
+  const table     = container.querySelector('.schedule-table');
   if (!table) return null;
 
-  // Temporarily remove overflow/scroll constraints so html2canvas sees the full table
-  const prevContainerOverflow = container.style.overflow;
-  const prevContainerWidth    = container.style.width;
-  const prevBodyOverflow      = document.body.style.overflow;
-
+  // Temporarily remove scroll constraints so html2canvas sees the whole table
+  const prevOverflow = container.style.overflow;
+  const prevWidth    = container.style.width;
   container.style.overflow = 'visible';
   container.style.width    = table.scrollWidth + 'px';
   document.body.style.overflow = 'hidden';
@@ -547,16 +496,16 @@ async function captureFullTable() {
     useCORS: true,
     scrollX: 0,
     scrollY: 0,
-    width:  table.scrollWidth,
-    height: container.scrollHeight,
+    width:        table.scrollWidth,
+    height:       container.scrollHeight,
     windowWidth:  table.scrollWidth + 64,
     windowHeight: container.scrollHeight + 64,
   });
 
-  // Restore styles
-  container.style.overflow = prevContainerOverflow;
-  container.style.width    = prevContainerWidth;
-  document.body.style.overflow = prevBodyOverflow;
+  // Restore
+  container.style.overflow    = prevOverflow;
+  container.style.width       = prevWidth;
+  document.body.style.overflow = '';
 
   return canvas;
 }
@@ -571,16 +520,14 @@ async function saveAsImage() {
 }
 
 async function saveAsPDF() {
-  const canvas = await captureFullTable();
+  const canvas  = await captureFullTable();
   if (!canvas) return;
   const imgData = canvas.toDataURL('image/png');
   const { jsPDF } = window.jspdf;
-  // Size the PDF page exactly to the image (in pts at 96dpi)
   const pxToMm = px => px * 0.264583;
   const w = pxToMm(canvas.width  / 2);
   const h = pxToMm(canvas.height / 2);
-  const orientation = w > h ? 'landscape' : 'portrait';
-  const pdf = new jsPDF({ orientation, unit: 'mm', format: [w, h] });
+  const pdf = new jsPDF({ orientation: w > h ? 'landscape' : 'portrait', unit: 'mm', format: [w, h] });
   pdf.addImage(imgData, 'PNG', 0, 0, w, h);
   pdf.save('ewu-schedule.pdf');
 }
