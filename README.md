@@ -5,6 +5,8 @@ Easily generate and visualize your EWU class schedule with our simple and modern
 ## Information
 This project is made by [Zahin A. Adib](https://github.com/Adib23704). All credits goes to him. I just modified it to my need. It shows time at top instead of the subject also a cyber theme.
 
+Access it on https://ewu-schedule.netlify.app/
+
 ## Features
 
 - Upload an Excel file of your EWU Advising Slip.
